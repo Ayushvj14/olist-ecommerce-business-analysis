@@ -1,6 +1,4 @@
-/*============================*/
 /*02_CUSTOMER_DASBOARD_KPI'S*/
-/*============================*/
 
 /*1. repeat_customer_%_by_state*/
 
@@ -53,13 +51,6 @@ FROM customers
 GROUP BY customer_state
 ORDER BY total_customers DESC
 
-/* | State | Customer Base |     Revenue |      AOV | Retention |
-| ----- | ------------: | ----------: | -------: | --------: |
-| SP    |       Highest |     Highest |      Low |   Average |
-| RJ    |   2nd Highest | 2nd Highest | Above SP |      High |
-| AC    |    Very Small |    Very Low |  Highest |   Highest |
-| RO    |    Very Small |    Very Low |     High |      High |
-*/
 
 /*Revenue per Customer by State*/
 WITH revenue_per_customer AS(SELECT c.customer_state AS states,
@@ -79,11 +70,3 @@ GROUP BY c.customer_state,c.customer_unique_id)
 								ORDER BY revenue_per_customer desc
                                 LIMIT 5
 
-/*| State |           AOV |           Retention | Loyalty Revenue % | Revenue/Customer |
-| ----- | ------------: | ------------------: | ----------------: | ---------------: |
-| AC    |        ✅ High |           ✅ Highest |         ✅ Highest |          ✅ Top 2 |
-| RO    |        ✅ High |             ✅ Top 2 |          ❌ Medium |          ✅ Top 3 |
-| PB    | ✅ Highest AOV | ❌ Average Retention |           ✅ Top 3 |        ✅ Highest |
-| RJ    |   ❌ Not Top 5 |             ✅ Top 5 |           ✅ Top 5 |      ❌ Not Top 5 |
-| SP    |  ❌ Lowest AOV | ❌ Average Retention |         ❌ Average |      ❌ Not Top 5 |
-*/
