@@ -1,6 +1,4 @@
-/*============================*/
 /*03_OPERATION'S_DASBOARD_KPI'S*/
-/*============================*/
 
 /*1.DELAYED_DELIVERY_PCT*/
 SELECT ROUND(
@@ -39,18 +37,7 @@ ON o.order_id = r.order_id)
                       SELECT avg(rating) FILTER (WHERE deliveries = 'ontime') AS rating_ontime_deliveries,
 					         AVG(rating) FILTER (WHERE deliveries = 'delayed') AS rating_delayed_deliveries
 					 FROM deliveries_time;
-/*insights
-Delivery Performance Impact Analysis
 
-Orders delivered on time receive an average review score of 4.30, while delayed orders receive an average review score of only 2.57.
-
-This represents a decline of 1.73 rating points, indicating a strong negative relationship between delivery delays and customer satisfaction.
-
-The findings suggest that improving delivery performance may directly improve customer experience, customer retention, and long-term revenue growth.
-
-Business Recommendation:
-Prioritize operational improvements in high-delay states and monitor delivery performance as a key driver of customer satisfaction.
-*/
 
 /*4.What percentage of orders are cancelled?*/
 SELECT ROUND(
@@ -78,13 +65,6 @@ FROM orders
 WHERE order_delivered_customer_date >
       order_estimated_delivery_date;
 
-/*insights 
-Operational Risk:
-8.11% of orders are delivered late, and delayed orders arrive
-9.55 days after the promised delivery date on average.
-These delays reduce customer ratings from 4.30 to 2.57,
-indicating a strong negative impact on customer experience.*/
-
 /*6. impact on revnue from delay deliveries*/
 SELECT ROUND(
        SUM(
@@ -102,19 +82,8 @@ FROM orders o
 JOIN payments p
 ON o.order_id = p.order_id;
 
-/*insights 
-Revenue Impact of Delivery Delays
 
-8.44% of total revenue is associated with orders delivered after the promised delivery date.
-
-This closely aligns with the delayed delivery rate of 8.11%, indicating that delivery delays affect a meaningful share of business activity rather than being isolated to low-value orders.
-
-Delayed orders are delivered 9.55 days late on average and receive significantly lower customer ratings (2.57 vs 4.30 for on-time deliveries).
-
-Business Recommendation:
-Reducing delivery delays represents an opportunity to improve customer satisfaction across a substantial portion of revenue-generating orders.
-*/
--- on time delivery pct
+--7. on time delivery pct
 SELECT ROUND(
             SUM(
                CASE WHEN order_delivered_customer_date<=order_estimated_delivery_date THEN 1
