@@ -1,6 +1,4 @@
-/*============================*/
 /*01_EXECUTIVE_DASBOARD_KPI'S*/
-/*============================*/
 
 /*KPI 1 : Total_revneue*/
 SELECT 
